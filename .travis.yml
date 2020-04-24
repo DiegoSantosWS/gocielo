@@ -1,0 +1,11 @@
+language: go
+os:
+  - linux
+go:
+  - "1.14.x"
+  - master
+before_install:
+  - GO111MODULE=auto
+script:
+  - go mod download
+  - go test ./...
