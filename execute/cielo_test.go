@@ -109,12 +109,12 @@ func TestAddCreditCard(t *testing.T) {
 			CreditCard: typescielo.ReqDataCard{
 				Card: typescielo.RequestCreditCard{
 					CustomerName:   "JOAO DA SILVA",
-					CardNumber:     "5067765034311438",
+					CardNumber:     "<NAMBER_FROM_CARD>",
 					Holder:         "DIEGO DOS SANTOS",
 					ExpirationDate: "11/2024",
 					Brand:          "ELO",
 				},
-				CodeCVC:       "542",
+				CodeCVC:       "123",
 				TypePayment:   "CreditCard",
 				ChangeDefault: true,
 			},
