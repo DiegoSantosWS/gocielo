@@ -77,3 +77,8 @@ func main() {
 	}
 }
 ```
+
+# TODO
+
+- Pagamento por cartão de débito
+- Pagamento por boleto

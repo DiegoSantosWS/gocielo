@@ -42,7 +42,7 @@ func CreatePayment(cc *typescielo.DataToPayment) *typescielo.Payment {
 }
 
 // GetCreditCard return the datas of credit card ", number, holder, expirationDate, brand, securityCode string, saveCard bool"
-func GetCreditCard(cc *typescielo.DataToPa	yment) *typescielo.CreditCard {
+func GetCreditCard(cc *typescielo.DataToPayment) *typescielo.CreditCard {
 	credC := &typescielo.CreditCard{
 		CardNumber:     cc.CardNumber,
 		CardToken:      cc.TokenCard,
