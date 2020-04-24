@@ -82,3 +82,8 @@ func main() {
 
 - Pagamento por cartão de débito
 - Pagamento por boleto
+
+
+# License
+
+MIT - Veja [LICENSE](https://github.com/DiegoSantosWS/gocielo/blob/master/LICENSE) file
