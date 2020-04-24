@@ -1,8 +1,6 @@
 package main_test
 
 import (
-	"fmt"
-	"log"
 	"testing"
 
 	"github.com/DiegoSantosWS/gocielo/execute"
@@ -38,11 +36,11 @@ func TestPayment(t *testing.T) {
 		t.Errorf("[ tests ] Error to register payment. status [%d], Error [%s]", orderResult.Payment.Status, err)
 	}
 
-	if orderResult.Payment.Status != int64(6) {
+	if orderResult.Payment.Status != int64(2) {
 		t.Errorf("[ tests ] Payment not registed status %d", orderResult.Payment.Status)
 	}
 
-	log.Println(fmt.Sprintf("%s", orderResult.Payment.CreditCard.CardToken))
-	log.Println(fmt.Sprintf("%s", orderResult.Payment.ReturnMessage))
+	// log.Println(fmt.Sprintf("%s", orderResult.Payment.CreditCard.CardToken))
+	// log.Println(fmt.Sprintf("%s", orderResult.Payment.ReturnMessage))
 	utilscielo.DisplayObjectFormatJSON(orderResult)
 }
