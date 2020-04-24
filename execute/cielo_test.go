@@ -132,11 +132,10 @@ func testAddCreditCard(t *testing.T, name string, req typescielo.ReqDataCard) {
 	if !ok || err != nil {
 		t.Errorf("alguma mensage [%s]", err)
 	}
-	utilscielo.DisplayObjectFormatJSON(string(body))
 	exp := map[string]interface{}{}
 	err = json.Unmarshal(body, &exp)
 	if err != nil {
 		t.Error(err)
 	}
-	validateAddCreditCard(t, name, exp)
+	utilscielo.DisplayObjectFormatJSON(exp)
 }

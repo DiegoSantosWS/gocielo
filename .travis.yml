@@ -8,4 +8,7 @@ before_install:
   - GO111MODULE=auto
 script:
   - go mod download
-  - go test ./...
+  - go test -run TestPayment -v
+  - go test ./execute -run TestCreatePayment -v
+  - go test ./execute -run TestGetCreditCard -v
+  - go test ./execute -run TestAddCreditCard -v
