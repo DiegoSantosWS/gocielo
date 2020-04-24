@@ -27,11 +27,11 @@ func TestPayment(t *testing.T) {
 		Brand:             "Visa",
 		CodeCVC:           "123",
 		NameCustomer:      "João da Silva Mendes",
-		TypePayment:       "CreditCard",
+		TypePayment:       typescielo.CC,
 	}
 	card := execute.GetCreditCard(dPay)
 	payment := execute.CreatePayment(dPay)
-	orderResult, err := execute.ExecPayment(dPay, card, payment)
+	orderResult, err := execute.ExecPaymentCreditCard(dPay, card, payment)
 	if err != nil {
 		t.Errorf("[ tests ] Error to register payment. status [%d], Error [%s]", orderResult.Payment.Status, err)
 	}

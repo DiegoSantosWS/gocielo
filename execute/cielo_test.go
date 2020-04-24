@@ -132,7 +132,7 @@ func testAddCreditCard(t *testing.T, name string, req typescielo.ReqDataCard) {
 	if !ok || err != nil {
 		t.Errorf("alguma mensage [%s]", err)
 	}
-	exp := map[string]interface{}{}
+	exp := typescielo.ResultGenerated{}
 	err = json.Unmarshal(body, &exp)
 	if err != nil {
 		t.Error(err)

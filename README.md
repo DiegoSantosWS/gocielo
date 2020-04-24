@@ -6,7 +6,18 @@ Lib de integração com gateway de pagamento CIELO
 
 ## Como usar
 
-Para usar a lib siga o exemplo abaixo.
+```bash
+
+$ mkdir your-project 
+$ cd your-project
+$ go mod github.com/[your-username]/your-project
+$ go get github.com/DiegoSantosWS/gocielo
+
+```
+
+## Exemplo 1
+
+### Executando pagamento
 
 ```go
 func main() {
@@ -17,7 +28,7 @@ func main() {
 		ValuePayment:        utilscielo.ConvertFloatToCents(1500.50),
 		NumberInstallments:  typescielo.NumInstallments,
 		InvoicesDescription: "Test payment",
-		CardNumber:          "1234123412341231", //
+		CardNumber:          "1234123412341231",
 		// TokenCard:           "",
 		NamePrintedOnCard: "JOÃO D O SILVA",
 		ExpirationDate:    "12/2030",
@@ -27,10 +38,42 @@ func main() {
 	}
 	pay := execute.CreatePayment(dataPayment)
 	card := execute.GetCreditCard(dataPayment)
-	order, err := execute.ExecPayment(dataPayment, card, pay)
+	order, err := execute.ExecPaymentCreditCard(dataPayment, card, pay)
 	if err != nil {
 		return
 	}
-	utilscielo.DisplayObjectFormatJSON(order)
+}
+```
+
+## Exemplo 2
+
+### Executando criando hash do cartão
+
+```go
+func main() {
+	request := typescielo.ReqDataCard{
+		Card: typescielo.RequestCreditCard{
+			CustomerName:   "JOAO DA SILVA",
+			CardNumber:     "<NAMBER_FROM_CARD>",
+			Holder:         "DIEGO DOS SANTOS",
+			ExpirationDate: "11/2024",
+			Brand:          "ELO",
+		},
+		CodeCVC:       "123",
+		TypePayment:   "CreditCard",
+		ChangeDefault: true,
+	}
+
+	ok, body, err := execute.AddCreditCard(req)
+	if !ok || err != nil {
+		log.Printf("Cannot add the card [%s]", err)
+	}
+
+	exp := typescielo.ResultGenerated{}
+	err = json.Unmarshal(body, &exp)
+	if err != nil {
+		log.Printf("Cannot add the card [%s]", err)
+		return
+	}
 }
 ```

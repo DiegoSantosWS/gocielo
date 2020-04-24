@@ -86,13 +86,13 @@ type Payment struct {
 	Status              int64         `json:"Status"`
 	ReturnCode          string        `json:"ReturnCode"`
 	ReturnMessage       string        `json:"ReturnMessage"`
-	Links               *[]Link       `json:"Links"`
+	Links               *[]Links      `json:"Links"`
 	ReceivedDate        string        `json:"ReceivedDate"`
 	IsSplitted          bool          `json:"IsSplitted"`
 }
 
-// Link represents the struct of links returned
-type Link struct {
+// Links represents the struct of links returned
+type Links struct {
 	Method string `json:"Method"`
 	Rel    string `json:"Rel"`
 	Href   string `json:"Href"`
@@ -107,6 +107,29 @@ type CreditCard struct {
 	Brand          string `json:"Brand"`
 	SecurityCode   string `json:"SecurityCode"`
 	CardToken      string `json:"CardToken"`
+}
+
+// DebitCard register debit card
+type DebitCard struct {
+	CardNumber                  string           `json:",omitempty"`
+	CustomerName                string           `json:",omitempty"`
+	Authenticate                bool             `json:",omitempty"`
+	ReturnUrl                   string           `json:",omitempty"`
+	IsCryptoCurrencyNegotiation bool             `json:",omitempty"`
+	Holder                      string           `json:",omitempty"`
+	ExpirationDate              string           `json:",omitempty"`
+	RecurrentPayment            RecurrentPayment `json:",omitempty"`
+	SecurityCode                string           `json:",omitempty"`
+	CardOnFile                  CardOnFile       `json:",omitempty"`
+	Brand                       string           `json:",omitempty"`
+	CardToken                   string           `json:",omitempty"`
+	Links                       []*Links         `json:",omitempty"`
+}
+
+// CardOnFile ...
+type CardOnFile struct {
+	Usage  string `json:",omitempty"`
+	Reason string `json:",omitempty"`
 }
 
 // Customer represents struct of customer to payment
@@ -138,7 +161,7 @@ type DataToPayment struct {
 	CodeCVC             string `json:",omitempty"`
 }
 
-// ReqDataCard ...
+// ReqDataCard Request to payment
 type ReqDataCard struct {
 	Card          RequestCreditCard `json:"card_data"`
 	CodeCVC       string            `json:"cvc"`
@@ -159,4 +182,11 @@ type RequestCreditCard struct {
 type ResultGenerated struct {
 	CardToken string      `json:"CardToken"`
 	Links     interface{} `json:"Links"`
+}
+
+// RecurrentPayment is used to configure recurrent payments
+type RecurrentPayment struct {
+	AuthorizeNow bool   `json:",omitempty"`
+	EndDate      string `json:",omitempty"`
+	Interval     string `json:",omitempty"`
 }

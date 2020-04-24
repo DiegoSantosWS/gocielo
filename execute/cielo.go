@@ -42,7 +42,7 @@ func CreatePayment(cc *typescielo.DataToPayment) *typescielo.Payment {
 }
 
 // GetCreditCard return the datas of credit card ", number, holder, expirationDate, brand, securityCode string, saveCard bool"
-func GetCreditCard(cc *typescielo.DataToPayment) *typescielo.CreditCard {
+func GetCreditCard(cc *typescielo.DataToPa	yment) *typescielo.CreditCard {
 	credC := &typescielo.CreditCard{
 		CardNumber:     cc.CardNumber,
 		CardToken:      cc.TokenCard,
@@ -55,8 +55,8 @@ func GetCreditCard(cc *typescielo.DataToPayment) *typescielo.CreditCard {
 	return credC
 }
 
-// ExecPayment register the payment on cielo and return the result of requisition
-func ExecPayment(dPay *typescielo.DataToPayment, card *typescielo.CreditCard, payment *typescielo.Payment) (*typescielo.Order, error) {
+// ExecPaymentCreditCard register the payment on cielo and return the result of requisition
+func ExecPaymentCreditCard(dPay *typescielo.DataToPayment, card *typescielo.CreditCard, payment *typescielo.Payment) (*typescielo.Order, error) {
 	dataPay, err := json.Marshal(
 		&typescielo.Order{
 			MerchantOrderID: dPay.BillingOrderID,
