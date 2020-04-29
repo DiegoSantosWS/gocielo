@@ -1,4 +1,4 @@
-package main_test
+package gocielo_test
 
 import (
 	"testing"

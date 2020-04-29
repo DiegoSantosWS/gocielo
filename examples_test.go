@@ -3,11 +3,16 @@ package gocielo
 import (
 	"encoding/json"
 	"log"
+	"testing"
 
 	"github.com/DiegoSantosWS/gocielo/execute"
 	"github.com/DiegoSantosWS/gocielo/typescielo"
 	"github.com/DiegoSantosWS/gocielo/utilscielo"
 )
+
+func TestMain(t *testing.T) {
+	t.Skip("PULANDO...")
+}
 
 func ExempleCreatePaymenet() {
 	dataPayment := &typescielo.DataToPayment{
@@ -91,7 +96,7 @@ func ExempleGetCreditCard() {
 		Brand:             "Visa",
 		CodeCVC:           "123",
 	}
-	
+
 	card := execute.GetCreditCard(dataPayment)
 
 	// está func imprime o resultado no terminal
