@@ -5,13 +5,13 @@
 Lib **gocielo** foi desenvolvida pensando em facilitar a integração com a cielo, e podendo ser ficar disponivel para a comunidade.
 
 - Visão
-	* O metodo ***CreatePayment*** monta os dados de pagamento um cartão com *tokenizado*. veja a implementação no exemplo [Exemplo 1](#Exemplo_1)
+	* O metodo ***CreatePayment*** monta os dados de pagamento um cartão com *tokenizado*. veja a implementação no exemplo [Exemplo 1](README.md#Exemplo-1)
 
-	* O metodo ***AddCreditCard*** é usado para criar/add um cartão com *tokenizado*. veja a implementação no exemplo [Exemplo 2](#Exemplo_2)
+	* O metodo ***AddCreditCard*** é usado para criar/add um cartão com *tokenizado*. veja a implementação no exemplo [Exemplo 2](README.md#Exemplo-2)
 
-	* O metodo ***GetCreditCard*** é usado para mondar os dados do cartão com ou sem *token*, essa informção será usada para executar o pagamento. veja a implementação no exemplo [Exemplo 3](#Exemplo_3)
+	* O metodo ***GetCreditCard*** é usado para mondar os dados do cartão com ou sem *token*, essa informção será usada para executar o pagamento. veja a implementação no exemplo [Exemplo 3](README.md#Exemplo-3)
 
-	* O metodo ***ExecPaymentCreditCard*** é responsável por executar o pagamento, seu retornor e o objeto *Order* onde contem informação do aconteceu. [Exemplo 4](#Exemplo_4)
+	* O metodo ***ExecPaymentCreditCard*** é responsável por executar o pagamento, seu retornor e o objeto *Order* onde contem informação do aconteceu. [Exemplo 4](README.md#Exemplo-4)
 
 ----
 
