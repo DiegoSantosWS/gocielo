@@ -58,7 +58,7 @@ func ExempleAddCreditCard() {
 		ChangeDefault: true,
 	}
 
-	ok, body, err := execute.AddCreditCard(req)
+	ok, body, err := execute.AddCreditCard(request)
 	if !ok || err != nil {
 		log.Printf("Cannot add the card [%s]", err)
 	}
@@ -115,7 +115,7 @@ func ExempleGetCreditCard() {
 	// }
 }
 
-func ExempleGetCreditCard() {
+func ExempleExecPaymentCreditCard() {
 	dataPayment := &typescielo.DataToPayment{
 		TypePayment:         typescielo.CC,
 		BillingOrderID:      "122",

@@ -86,7 +86,7 @@ func main() {
 		ChangeDefault: true,
 	}
 
-	ok, body, err := execute.AddCreditCard(req)
+	ok, body, err := execute.AddCreditCard(request)
 	if !ok || err != nil {
 		log.Printf("Cannot add the card [%s]", err)
 	}
