@@ -13,6 +13,18 @@ jobs:
       - run:
           name: Install Dependencies
           command: go mod download
+
+      - run:
+          name: "echo all environment to host"
+          command: echo $GOCIELO_HOST
+      - run:
+          name: "echo all port"
+          command: echo $GOCIELO_PORT
+
+      - run:
+          name: "echo internal environment"
+          command: echo $CPU_MIN_VALUE
+          
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
           paths:
