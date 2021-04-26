@@ -15,15 +15,19 @@ jobs:
           command: go mod download
 
       - run:
-          name: "echo all environment to host"
-          command: echo $GOCIELO_HOST
+          name: "echo environment to host"
+          command: echo ${GOCIELO_HOST}
       - run:
-          name: "echo all port"
-          command: echo $GOCIELO_PORT
+          name: "echo port value"
+          command: echo ${GOCIELO_PORT}
 
       - run:
-          name: "echo internal environment"
+          name: "echo cpu mim environment"
           command: echo $CPU_MIN_VALUE
+      
+      - run:
+          name: "echo cpu max environment"
+          command: echo $CPU_MAX_VALUE
           
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
