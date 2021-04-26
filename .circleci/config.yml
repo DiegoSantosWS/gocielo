@@ -34,9 +34,14 @@ jobs:
           paths:
             - "/go/pkg/mod"
 workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
+  jobs:
+    build-test-deploy:
       - build
       - hold:
-          type: approval
+          type: approval # presents manual approval button in the UI
+          requires:
+            - build
+      - deploy:
+          context: org-global
+          requires:
+            - build
