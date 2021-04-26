@@ -5,6 +5,10 @@ workflows:
       jobs:
         - build:
             context: TESTES
+        - hold:
+            type: approval
+            requires:
+              - build
 jobs:
   build:
     working_directory: ~/repo
