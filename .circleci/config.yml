@@ -28,20 +28,18 @@ jobs:
             echo $TEST_ENV_VAR
             echo $PROJECT_ENV_VAR
             echo $CONTEXT_ENV_VAR
-            
+          
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
           paths:
             - "/go/pkg/mod"
 workflows:
-  jobs:
-    build-test-deploy:
-      - build
-      - hold:
-          type: approval # presents manual approval button in the UI
-          requires:
-            - build
-      - deploy:
-          context: org-global
-          requires:
-            - build
+    build-and-deploy:
+      jobs:
+        - build
+        - hold:
+            name: "approval"
+            type: approval
+            requires:
+              - build
+            context: org-global
