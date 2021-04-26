@@ -13,15 +13,19 @@ jobs:
       - run:
           name: Install Dependencies
           command: go mod download
-
       - run:
-          context: TESTE
+          name: "Setup custom variable"
+          command: echo 'export TEST_ENV_VAR="DIEGO"' >> $BASH_ENV
+      - run:
           name: "echo environment to host"
           command: |
             echo $GOCIELO_HOST
             echo $GOCIELO_PORT
             echo $CPU_MIN_VALUE
             echo $CPU_MAX_VALUE
+            echo $CIRCLE_BRANCH
+            echo $CIRCLE_COMMIT
+            
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
           paths:
