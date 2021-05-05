@@ -7,7 +7,7 @@ defaults: &defaults
 
 workflows:
   version: 2
-  workflow:
+  build:
     jobs:
       - build-deploy
       - build:
