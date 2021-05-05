@@ -28,15 +28,15 @@ jobs:
       - run:
           name: "echo environment to host"
           command: |
-            echo $GOCIELO_HOST
-            echo $GOCIELO_PORT
+            echo ${GOCIELO_HOST}
+            echo ${GOCIELO_PORT}
             echo $CPU_MIN_VALUE
             echo $CPU_MAX_VALUE
             echo $CIRCLE_BRANCH
             echo $CIRCLE_SHA1
             echo $TEST_ENV_VAR
-            echo $PROJECT_ENV_VAR
-            echo $CONTEXT_ENV_VAR
+            echo ${PROJECT_ENV_VAR}
+            echo ${CONTEXT_ENV_VAR}
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
           paths:
@@ -79,12 +79,16 @@ workflows:
               ignore: 
                 - develop
       - deploy-stage:
+          context: 
+            - general
           requires:
             - build
           filters:
             branches:
               only: circleci-project-setup
       - deploy-prod:
+          context: 
+            - general
           requires:
             - build
           filters:
