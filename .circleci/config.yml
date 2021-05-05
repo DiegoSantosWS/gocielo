@@ -16,8 +16,7 @@ workflows:
             - build-deploy
           filters:
             branches:
-              - circleci-project-setup
-              - master
+              only: circleci-project-setup
 
 jobs:
   build-deploy:
