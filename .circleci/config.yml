@@ -4,13 +4,15 @@ version: 2
 defaults: &defaults
   docker:
     - image: circleci/golang:1.16
-  context: general
+  context: 
+    - general
+    - TESTES
 
 jobs:
   build:
     <<: *defaults
 
-    context: TESTES
+    # context: TESTES
     working_directory: ~/repo
     steps:
       - checkout
@@ -43,19 +45,21 @@ jobs:
   deploy-stage:
     <<: *defaults
     working_directory: /tmp/my-project
+    context: general
     steps:
       - run:
           name: "read context general"
           command: |
-            echo $OXUMAPI_HOST
-            echo $OXUMAPI_PORT
-            echo $OXUMAPI_VERSION
+            echo ${OXUMAPI_HOST}
+            echo ${OXUMAPI_PORT}
+            echo ${OXUMAPI_VERSION}
             echo "URL:"
-            echo "$OXUMAPI_HOST:$OXUMAPI_PORT/$OXUMAPI_VERSION"
+            echo ${OXUMAPI_HOST}:${OXUMAPI_PORT}/${OXUMAPI_VERSION}
 
   deploy-prod:
     <<: *defaults
     working_directory: /tmp/my-project
+    context: general
     steps:
       - run:
           name: "read context general"
