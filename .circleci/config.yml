@@ -50,9 +50,16 @@ jobs:
       - run:
           name: "read context general"
           environment:
-            CPU_MIN_VALUE: ${CPU_MIN_VALUE_STG}
-            CPU_MAX_VALUE: ${CPU_MAX_VALUE_STG}
+            CPU_MIN_VALUE: $CPU_MIN_VALUE_STG
+            CPU_MAX_VALUE: $CPU_MAX_VALUE_STG
+
           command: |
+            echo ${CPU_MIN_VALUE}
+            echo ${CPU_MAX_VALUE}
+            echo "EXPORT:"
+            export CPU_MIN_VALUE=$CPU_MIN_VALUE_STG >> $BASH_ENV
+            export CPU_MAX_VALUE=$CPU_MAX_VALUE_STG >> $BASH_ENV
+            echo "POS EXPORT:"
             echo ${CPU_MIN_VALUE}
             echo ${CPU_MAX_VALUE}
             echo ${OXUMAPI_HOST}
