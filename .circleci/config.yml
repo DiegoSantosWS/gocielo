@@ -17,29 +17,11 @@ workflows:
           filters:
             branches:
               only: circleci-project-setup
-      - read-env-general:
-          job:
-            - build-deploy-prod
-            - build:
-                context: general
-                filters:
-                  branches:
-                    only: master
       - deploy:
-          name: deploy-dev
+          context: general
           filters:
             branches:
               only: master
-          setps:
-            - checkout
-            - run:
-              name: "read context general"
-              command: |
-                echo $OXUMAPI_HOST
-                echo $OXUMAPI_PORT
-                echo $OXUMAPI_VERSION
-                echo "URL:"
-                echo "$OXUMAPI_HOST:$OXUMAPI_PORT/$OXUMAPI_VERSION"
 
 jobs:
   build-deploy:
