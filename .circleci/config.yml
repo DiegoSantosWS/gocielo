@@ -1,15 +1,13 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
+version: 2
 
 defaults: &defaults
   docker:
-    - image: circleci/golang:1.16 
+    - image: circleci/golang:1.16
 
 workflows:
-
-  main:
+  workflow:
     jobs:
-      - build-deploy
       - build:
           requires:
             - build-deploy
@@ -19,13 +17,28 @@ workflows:
               only: circleci-project-setup
       - read-env-general:
           job:
-            - build-deploy
+            - build-deploy-prod
             - build:
                 context: general
                 filters:
                   branches:
                     only: master
-    
+      - deploy:
+          name: deploy-dev
+          filters:
+            branches:
+              only: master
+          setps:
+            - checkout
+            - run:
+              name: "read context general"
+              command: |
+                echo $OXUMAPI_HOST
+                echo $OXUMAPI_PORT
+                echo $OXUMAPI_VERSION
+                echo "URL:"
+                echo "$OXUMAPI_HOST:$OXUMAPI_PORT/$OXUMAPI_VERSION"
+
 jobs:
   build-deploy:
     <<: *defaults
