@@ -1,19 +1,35 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
+version: 2
+
+defaults: &defaults
+  docker:
+    - image: circleci/golang:1.16 
+
 workflows:
-    build-and-deploy:
-      jobs:
-        - build:
-            context: TESTES
-        - hold:
-            type: approval
-            requires:
-              - build
+  version: 2
+  main:
+    jobs:
+      - build-deploy
+      - build:
+          requires:
+            - build-deploy
+          context: TESTES
+          filters:
+            branches:
+              only: circleci-project-setup
+  read-env-general:
+    jobs:
+      - build-deploy
+      - build:
+          context: general
+          filters:
+            branches:
+              only: master
+    
 jobs:
-  build:
+  build-deploy:
+    <<: *defaults
     working_directory: ~/repo
-    docker:
-      - image: circleci/golang:1.16
     steps:
       - checkout
       - restore_cache:
@@ -37,7 +53,14 @@ jobs:
             echo $TEST_ENV_VAR
             echo $PROJECT_ENV_VAR
             echo $CONTEXT_ENV_VAR
-          
+      - run:
+          name: "read context general"
+          command: |
+            echo $OXUMAPI_HOST
+            echo $OXUMAPI_PORT
+            echo $OXUMAPI_VERSION
+            echo "URL:"
+            echo ${$OXUMAPI_HOST}:${$OXUMAPI_PORT}/${OXUMAPI_VERSION}
       - save_cache:
           key: go-mod-v4-{{ checksum "go.sum" }}
           paths:
