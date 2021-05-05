@@ -6,6 +6,7 @@ defaults: &defaults
     - image: circleci/golang:1.16
 
 workflows:
+  version: 2
   workflow:
     jobs:
       - build:
