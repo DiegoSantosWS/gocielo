@@ -10,22 +10,20 @@ workflows:
   build:
     jobs:
       - build-deploy
-      - build:
-          requires:
-            - build-deploy
-          context: TESTES
-          filters:
-            branches:
-              only: circleci-project-setup
       - deploy:
           context: general
+          requires:
+            - build-deploy
           filters:
             branches:
-              only: master
+              - circleci-project-setup
+              - master
 
 jobs:
   build-deploy:
     <<: *defaults
+    
+    context: TESTES
     working_directory: ~/repo
     steps:
       - checkout
